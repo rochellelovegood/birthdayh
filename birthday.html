@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Phoo!</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/03/f3/fd/03f3fd2166a0f3b4bdf8869d373760b0.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+    .fade-delay-1 { animation-delay: 0.3s; }
+    .fade-delay-2 { animation-delay: 0.6s; }
+    .fade-delay-3 { animation-delay: 0.9s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bounce-in {
+      animation: bounceIn 1s ease;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 1; }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+
+    .meme-surprise {
+      transform: scale(0);
+      transition: transform 0.6s ease-out;
+    }
+
+    .meme-surprise.show {
+      transform: scale(1);
+    }
+
+    .flying-idol {
+      position: fixed;
+      top: 20%;
+      left: -200px;
+      width: 150px;
+      z-index: 50;
+      animation: flyAcross 6s linear 1s forwards;
+    }
+
+    @keyframes flyAcross {
+      to {
+        left: 110%;
+      }
+    }
+
+    .btn-blue {
+      background-color: #bfdbfe;
+      color: #1e3a8a;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+    }
+    .btn-blue:hover {
+      background-color: #60a5fa;
+      transform: scale(1.1);
+    }
+
+    .bg-overlay {
+      backdrop-filter: blur(6px);
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 1rem;
+      max-width: 90%;
+      width: 640px;
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+  <audio id="scrollSound" src="" preload="auto"></audio>
+
+  <script>
+    window.onload = () => {
+      confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+      const idol = document.createElement('img');
+      idol.src = 'photo/suho.png';
+      idol.className = 'flying-idol';
+      document.body.appendChild(idol);
+    };
+
+    let soundPlayed = false;
+    window.addEventListener('scroll', () => {
+      const surprise = document.getElementById('memeSurprise');
+      const sound = document.getElementById('scrollSound');
+      if (window.scrollY > window.innerHeight * 0.5) {
+        surprise.classList.add('show');
+        if (!soundPlayed) {
+          sound.play();
+          soundPlayed = true;
+        }
+      }
+    });
+
+    function showVideo() {
+      const modal = document.getElementById('videoModal');
+      modal.style.display = 'flex';
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById('videoModal');
+      modal.style.display = 'none';
+      const iframe = document.getElementById('videoFrame');
+      iframe.src = iframe.src;
+    }
+  </script>
+
+  <div class="text-center py-12 bg-overlay fade-in fade-delay-1">
+    <h1 class="text-5xl font-bold text-blue-800 bounce-in">🎉 Happy Birthday Phoo Myat Noe Wai! 🎉</h1>
+    <p class="mt-4 text-xl">Roomies for 2 years and still alive! Miraculous 😆</p>
+    <button class="btn-blue mt-4" onclick="showVideo()">Click me for no reason 🤪</button>
+  </div>
+
+  <div id="videoModal" class="modal" onclick="closeVideo()">
+    <div class="modal-content">
+      <iframe id="videoFrame" width="100%" height="360" src="photo/video_2025-05-21_23-08-48.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="max-w-3xl mx-auto mt-8 p-6 rounded-2xl shadow-xl fade-in fade-delay-2 bg-overlay">
+    <h2 class="text-2xl font-semibold text-blue-700 mb-4">💌 A Special Message</h2>
+    <p class="text-lg">
+      Dear Phoo,
+      <br /><br />
+      Wishing you the most fabulous birthday ever! 🎂 May all your dreams come true — including meeting your idol ASAP (like, someone get them a plane ticket already ✈️). 
+      You're kind, smart, chaotic in the best way, and the real MVP of this roommate Journey. 
+      Thank you for surviving two years of questionable WiFi, late-night talks, noodle dinners and my moody mental.
+      Sorry for not contacting lately and sorry for my betrayl as a roommate but you did betray me too so we are even.
+       Just don't say out loud when we meet in person you are my best roommate and my bestie that tolerate my temper and craziness.
+       Here's to more memes...
+    </p>
+  </div>
+
+  <div id="memeSurprise" class="meme-surprise flex justify-center mt-16">
+    <img src="photo/meme.jpg" alt="BOOM Phoo Face" class="rounded-full w-64 h-64 shadow-2xl border-4 border-blue-400">
+  </div>
+
+  <div class="max-w-3xl mx-auto mt-10 fade-in fade-delay-3 bg-overlay p-6 rounded-xl">
+    <h2 class="text-2xl font-semibold text-blue-700 mb-4">📸 Meme Gallery</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <img src="https://i.imgflip.com/2/4t0m5.jpg" alt="Birthday Meme 1" class="w-full h-auto rounded-xl shadow-md transform hover:scale-105 transition duration-300">
+      
+      <img src="photo/d.jpg" alt="Birthday Meme 2" class="w-full h-auto rounded-xl shadow-md transform hover:scale-105 transition duration-300">
+      
+      <img src="photo/ddd.jpg" alt="Birthday Meme 3" class="w-full h-auto rounded-xl shadow-md transform hover:scale-105 transition duration-300">
+    </div>
+  </div>
+  
+
+  <div class="max-w-3xl mx-auto mt-10 p-6 bg-overlay rounded-2xl shadow-md fade-in fade-delay-2">
+    <h2 class="text-2xl font-semibold text-blue-700 mb-4">✨ Fun Facts About Phoo</h2>
+    <ul class="list-disc list-inside text-lg">
+      <li>Loves baby blue 💙</li>
+      <li>Ultimate fangirl of Suho from EXO 🕺</li>
+      <li>Once survived a week without breakfast and spending money</li>
+      <li>Has the WiFi password memorized by heart</li>
+    </ul>
+  </div>
+
+  <div class="text-center mt-10 mb-20 fade-in fade-delay-3 bg-overlay py-6 mx-4 rounded-xl">
+    <p class="text-lg font-semibold text-blue-800"> Let there be cake, tea, and a moment of fangirling </p>
+    <p class="text-sm text-gray-500">Made with love by your favorite (and only not only anymore but) roommate 💖</p>
+  </div>
+</body>
+</html>
