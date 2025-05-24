@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Awesome Friend</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f9ff, #ffffff);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow-x: hidden;
+    }
+    .title {
+      font-size: 3rem;
+      color: #3b82f6;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(-10px); }
+      50% { transform: translateY(10px); }
+    }
+    .slide {
+      display: none;
+      text-align: center;
+    }
+    .slide.active {
+      display: block;
+      animation: spinScale 1s ease-in-out;
+    }
+    @keyframes spinScale {
+      0% { transform: rotate(0deg) scale(0.8); opacity: 0; }
+      100% { transform: rotate(360deg) scale(1); opacity: 1; }
+    }
+    .caption {
+      background: rgba(255, 255, 255, 0.8);
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .final-message {
+      display: none;
+      text-align: center;
+      font-size: 2rem;
+      color: #10b981;
+      margin-top: 50px;
+      animation: bounceIn 1s ease-out forwards;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="text-center mt-10">
+    <h1 class="title">🎉 YOU'RE THE BEST! 🎉</h1>
+  </div>
+
+  <div id="slideshow" class="relative max-w-xl mx-auto mt-10">
+    <div class="slide active">
+      <img src="photo/funnybald.jpg" alt="Funny Bald" class="mx-auto rounded-xl shadow-lg max-h-80">
+      <div class="caption">"Caught slaying the day! 💅"</div>
+    </div>
+    <div class="slide">
+      <img src="photo/stop.jpg" alt="Stop Sign" class="mx-auto rounded-xl shadow-lg max-h-80">
+      <div class="caption">"Oops, caught in 4K! 📸"</div>
+    </div>
+    <div class="slide">
+      <img src="photo/icute.jpg" alt="I Cute" class="mx-auto rounded-xl shadow-lg max-h-80">
+      <div class="caption">"Did someone say superstar? 🌟"</div>
+    </div>
+    <div class="slide">
+        <img src="photo/swapHoodie.jpg" alt="I Cute" class="mx-auto rounded-xl shadow-lg max-h-80">
+        <div class="caption">"give me your hoodie"</div>
+      </div>
+      <div class="slide">
+        <img src="photo/cheese.jpg" alt="I Cute" class="mx-auto rounded-xl shadow-lg max-h-80">
+        <div class="caption">"အိုင်အမ်စတား 🌟"</div>
+      </div>
+  </div>
+
+  <div id="finalMessage" class="final-message">
+    🎉😂 You survived the slideshow! 🎶
+    <br><br>
+    <iframe width="300" height="169" src="https://www.youtube.com/embed/mLCBdRTIU-0?autoplay=1" title="Birthday Song" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+<!-- 
+  <audio id="bgMusic" src="audio/audio.mp3"  autoplay></audio> -->
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current++;
+      if (current < slides.length) {
+        slides[current].classList.add('active');
+      } else {
+        document.getElementById('finalMessage').style.display = 'block';
+        confetti({ particleCount: 300, spread: 100 });
+        clearInterval(slideShowInterval);
+      }
+    }
+
+    const slideShowInterval = setInterval(nextSlide, 3500);
+
+
+    const audio = document.getElementById('bgMusic');
+
+  // Wait until the audio is loaded and ready
+  audio.addEventListener('canplaythrough', () => {
+    // Set the start time to 10 seconds
+    audio.currentTime = 10;
+
+    // Play the audio
+    audio.play();
+
+    // Stop the audio after 6 seconds
+    setTimeout(() => {
+      audio.pause();
+    }, 6000);
+  });
+  </script>
+</body>
+</html>

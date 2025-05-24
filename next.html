@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Awesome Friend</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @keyframes boomIn {
+      0% {
+        transform: scale(0.3) rotate(-15deg);
+        opacity: 0;
+        filter: brightness(0.5) contrast(2) saturate(2);
+      }
+      50% {
+        transform: scale(1.2) rotate(5deg);
+        filter: none;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-content {
+      background: white;
+      padding: 1rem;
+      border-radius: 1.5rem;
+      width: 90%;
+      max-width: 720px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+      animation: boomIn 0.8s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-blue-100 flex items-center justify-center h-screen text-center">
+
+  <div>
+    <h1 class="text-4xl font-extrabold text-blue-700 animate-bounce"> you are just a piece of shit whose mantra is "စပ" 🌀</h1>
+    <button onclick="showVideo()" class="mt-8 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transform hover:scale-110 transition">Click me for chaos 🎬</button>
+    <a href="next2.html" class="btn-blue mx-auto">Click me for your mental health </a>
+  </div>
+
+  <!-- Modal -->
+  <div id="videoModal" class="video-modal" onclick="closeVideo()">
+    <div class="video-content">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Wv_j43w8pOI?si=uz6OW3bwU4xUSy4t" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Optional Pop Sound -->
+  <audio id="popSound" src="https://www.myinstants.com/media/sounds/pop.mp3" preload="auto"></audio>
+
+  <script>
+    function showVideo() {
+      const modal = document.getElementById('videoModal');
+      const sound = document.getElementById('popSound');
+      modal.style.display = 'flex';
+      sound.play();
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      modal.style.display = 'none';
+      iframe.src = iframe.src;
+    }
+  </script>
+
+</body>
+</html>
